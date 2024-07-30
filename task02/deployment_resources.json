@@ -1,0 +1,48 @@
+{
+  "lambda-basic-execution": {
+    "policy_content": {
+      "Statement": [
+        {
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "dynamodb:GetItem",
+            "dynamodb:Query",
+            "dynamodb:PutItem",
+            "dynamodb:Batch*",
+            "dynamodb:DeleteItem",
+            "ssm:PutParameter",
+            "ssm:GetParameter",
+            "kms:Decrypt"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        }
+      ],
+      "version": "1.0",
+      "name": "hello_world",
+      "lambda_path": "lambdas\\hello_world",
+      "func_name": "lambdas/hello_world/index.handler",
+      "resource_type": "lambda",
+      "iam_arn_role": "hello_world-role",
+      "runtime": "java8",
+      "memory": 123,
+      "timeout": 123,
+      "publish_version": false,
+      "url_config": {
+        "auth_type": "NONE"
+      },
+      "ephemeral_storage": 512
+    },
+    "resource_type": "iam_policy"
+  },
+  "hello_world-role": {
+    "predefined_policies": [],
+    "principal_service": "lambda",
+    "custom_policies": [
+      "lambda-basic-execution"
+    ],
+    "resource_type": "iam_role"
+  }
+}
